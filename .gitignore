@@ -1,8 +1,3 @@
 # General Directories
 Build/
 .vs/
-
-# Submodule Directories
-Elysian/vendor/assimp/
-Elysian/vendor/glfw/
-# Elysian/vendor/spdlog/
