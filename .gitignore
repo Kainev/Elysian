@@ -5,4 +5,4 @@ Build/
 # Submodule Directories
 Elysian/vendor/assimp/
 Elysian/vendor/glfw/
-Elysian/vendor/spdlog/
+# Elysian/vendor/spdlog/
