@@ -4,6 +4,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(
         source_list
         "src/main.cpp"
+
+        "include/PhysicsSystem.h"
+
+        "src/PhysicsSystem.cpp"
 )
 
 add_executable(Application ${source_list})
