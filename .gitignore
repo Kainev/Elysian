@@ -1,3 +1,6 @@
 # General Directories
 Build/
 .vs/
+
+#
+generate_build_files.bat
