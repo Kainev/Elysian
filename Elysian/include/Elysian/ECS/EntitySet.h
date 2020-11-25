@@ -16,7 +16,7 @@ namespace Elysian
 	public:
 		EntitySet() {}
 
-		EntitySet(ComponentBitset<t_max_components> pattern, std::size_t max_entities=4096) : m_pattern(pattern)
+		EntitySet(ComponentBitset<t_max_components> pattern, std::size_t max_entities) : m_pattern(pattern)
 		{
 			const std::vector<ComponentType>& types = pattern.component_types();
 			for (int i = 0; i < types.size(); i++)

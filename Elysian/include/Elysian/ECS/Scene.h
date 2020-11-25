@@ -6,6 +6,7 @@
 
 #include "Elysian/ECS/Types.h"
 #include "Elysian/ECS/ComponentPattern.h"
+#include "Elysian/ECS/ComponentTemplate.h"
 #include "Elysian/ECS/System.h"
 #include "Elysian/ECS/EntitySet.h"
 #include "Elysian/Core/Profiler.h"
@@ -26,16 +27,19 @@ namespace Elysian
 		template<class T>
 		T* register_system();
 
-		void test_func(const ComponentBitset<t_max_components>& c_bitset)
+		template<typename ... T_ComponentTypes>
+		ComponentTemplate<t_max_components, T_ComponentTypes...> preregister_entity_definition(std::size_t max_entities=t_max_entities)
 		{
-			m_entity_sets[c_bitset] = EntitySet<t_max_components>(c_bitset);
+			ComponentTemplate<t_max_components, T_ComponentTypes...> component_template;
+			m_entity_sets[component_template] = EntitySet<t_max_components>(component_template, max_entities);
+			return component_template;
 		}
 
 		template<typename ... T_COMPONENTS>
 		EntityID create_entity();
 
-		template<typename ... T_COMPONENT_TYPES>
-		EntityID create_entity(const ComponentBitset<t_max_components>& pattern);
+		template<typename T>
+		EntityID create_entity(const T& component_template);
 
 		template<typename ... T_COMPONENTS>
 		void attach_components(const EntityID& entity_id);
@@ -91,10 +95,10 @@ namespace Elysian
 	}
 
 	template<std::size_t t_max_components, std::size_t t_max_entities>
-	template<typename ...T_COMPONENTS>
-	inline EntityID Scene<t_max_components, t_max_entities>::create_entity(const ComponentBitset<t_max_components>& pattern)
+	template<typename T>
+	inline EntityID Scene<t_max_components, t_max_entities>::create_entity(const T& component_template)
 	{
-		m_entity_sets[pattern].create_entity<T_COMPONENTS...>();
+		component_template.instantiate_entity(m_entity_sets[component_template]);
 		return EntityID();
 	}
 

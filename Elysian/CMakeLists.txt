@@ -11,11 +11,11 @@ set(
     "include/Elysian/Core/Platform.h"
     "include/Elysian/Core/Assert.h"
     "include/Elysian/Core/Logging.h"
-    "include/Elysian/Core/Profiler.h"
 
     "include/Elysian/ECS/EntitySet.h"
     "include/Elysian/ECS/ComponentPattern.h"
     "include/Elysian/ECS/ComponentArray.h"
+    "include/Elysian/ECS/ComponentTemplate.h"
     "include/Elysian/ECS/Scene.h"
     "include/Elysian/ECS/System.h"
     "include/Elysian/ECS/Types.h"

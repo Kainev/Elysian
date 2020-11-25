@@ -2,9 +2,10 @@
 #include "Elysian/Core/Application.h"
 #include "Elysian/ECS/ComponentPattern.h"
 #include "Elysian/ECS/Scene.h"
-#include "Elysian/Core/Profiler.h"
+//#include "Elysian/Core/Profiler.h"
 
 #include "PhysicsSystem.h"
+#include "Elysian/ECS/ComponentTemplate.h"
 
 struct Health
 {
@@ -15,13 +16,22 @@ struct Input
 {
 	bool w = false;
 	bool s = false;
-	float health = 2.f;
 };
 
 struct Fire
 {
 	bool on_fire = false;
-	float health = 3.f;
+};
+
+struct Mesh
+{
+	int mesh = 0;
+};
+
+struct Transform
+{
+	float x = 0.f;
+	float y = 0.f;
 };
 
 
@@ -39,22 +49,21 @@ public:
 int main()
 {
 	Elysian::initialize<MyApplication>();
-	auto pattern1 = Elysian::component_pattern<Health, Input, Fire>();
-
 	Elysian::Scene scene;
-	scene.test_func(pattern1);
+
+	auto static_mesh_template = scene.preregister_entity_definition<Health, Input, Fire>();
 
 	{
-		PROFILE_SCOPE("CREATE");
-		for (int i = 0; i < 10; i++)
-			scene.create_entity<Health, Input, Fire>(pattern1);
+		//PROFILE_SCOPE("CREATE");
+		for (int i = 0; i < 4000; i++)
+			scene.create_entity(static_mesh_template);
 	}
 
 
 	
-	//auto pattern2 = Elysian::component_pattern<Health, Input, Fire>();
-	//auto pattern3 = Elysian::component_pattern<Health, Input>();
-	//auto pattern4 = Elysian::component_pattern(Elysian::component_type<Health>(), Elysian::component_type<Input>(), Elysian::component_type<Fire>());
+	//auto pattern2 = Elysian::component_bitset<Health, Input, Fire>();
+	//auto pattern3 = Elysian::component_bitset<Health, Input>();
+	//auto pattern4 = Elysian::component_bitset(Elysian::component_type<Health>(), Elysian::component_type<Input>(), Elysian::component_type<Fire>());
 
 	//
 

@@ -9,6 +9,9 @@
 
 namespace Elysian
 {
+	template<std::size_t t_max_components = 128>
+	class EntitySet;
+
 	template<uint32_t t_max_components>
 	class ComponentBitset
 	{
@@ -101,7 +104,7 @@ namespace Elysian
 
 	/*********************************************************************************************************************************/
 	template<typename... T_Components>
-	inline ComponentBitset<128> component_pattern()
+	inline ComponentBitset<128> component_bitset()
 	{
 		ComponentBitset<128> pattern;
 		(pattern.set(component_type<T_Components>()), ...);
@@ -110,33 +113,13 @@ namespace Elysian
 	}
 
 	template<typename... T_Components>
-	inline ComponentBitset<128> component_pattern(T_Components... types)
+	inline ComponentBitset<128> component_bitset(T_Components... types)
 	{
 		ComponentBitset<128> pattern;
 		(pattern.set(types), ...);
 
 		return pattern;
 	}
-
-
-	template<uint32_t t_max_components, typename... t_components>
-	class ComponentTemplate : public ComponentBitset<t_max_components>
-	{
-	public:
-		ComponentTemplate()
-		{
-			(m_bitset.set(t_components), ...);
-		}
-
-	protected:
-		/*void instantiate_entity(EntitySet& set)
-		{
-
-		}*/
-
-	private:
-		ComponentBitset<t_max_components> m_bitset;
-	};
 }
 
 namespace std

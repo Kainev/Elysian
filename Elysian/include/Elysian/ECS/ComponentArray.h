@@ -8,10 +8,10 @@ namespace Elysian
 {
 	namespace Internal
 	{
-		template <typename T, typename ... Args>
-		inline void Construct_T(T* object, Args&&... params)
+		template <typename T, typename ... T_Args>
+		inline void Construct_T(T* object, T_Args&&... params)
 		{
-			new (object)T{ std::forward<Args>(params)... };
+			new (object)T{ std::forward<T_Args>(params)... };
 		}
 
 		template <typename T>
@@ -44,8 +44,9 @@ namespace Elysian
 			template<typename T>
 			T* next()
 			{
+				// TODO: Call destructor of last removed index???? Store ptr* of last removed, if(ptr != nullptr) destroy__t
 				T* component = (T*)m_data + m_count;
-				Construct_T<T>(component);
+				Construct_T<T>(component); // TODO: Store this as static ?
 				m_count++;
 				return component;
 			}
