@@ -4,16 +4,16 @@
 
 namespace Elysian
 {
-	std::shared_ptr<spdlog::logger> Logging::sEngineLogger;
-	std::shared_ptr<spdlog::logger> Logging::sClientLogger;
+	std::shared_ptr<spdlog::logger> Logging::s_engine_logger;
+	std::shared_ptr<spdlog::logger> Logging::s_client_logger;
 
 	void Logging::initialize()
 	{
 		spdlog::set_pattern("%^[%T] %n: %v%$");
-		sEngineLogger = spdlog::stdout_color_mt("Elysian");
-		sEngineLogger->set_level(spdlog::level::trace);
+		s_engine_logger = spdlog::stdout_color_mt("Elysian");
+		s_engine_logger->set_level(spdlog::level::trace);
 
-		sClientLogger = spdlog::stdout_color_mt("Client");
-		sClientLogger->set_level(spdlog::level::trace);
+		s_client_logger = spdlog::stdout_color_mt("Client");
+		s_client_logger->set_level(spdlog::level::trace);
 	}
 }

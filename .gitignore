@@ -1,6 +1,7 @@
 # General Directories
 Build/
 .vs/
+Profiler/
 
 #
 generate_build_files.bat
