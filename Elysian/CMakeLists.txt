@@ -5,15 +5,39 @@ set(
     source_list
     "include/Elysian.h"
 
-    "include/Elysian/Core/Application.h"
-    "include/Elysian/Core/pch.h"
-    "include/Elysian/Core/Engine.h"
-    "include/Elysian/Core/Platform.h"
-    "include/Elysian/Core/Assert.h"
-    "include/Elysian/Core/Logging.h"
+    "vendor/glad/glad/glad.h"
 
-    "src/Elysian/Core/Logging.cpp"
+    "include/Elysian/Core/pch.h"
+    "include/Elysian/Core/Assert.h"
+    "include/Elysian/Core/Platform.h"
+    "include/Elysian/Core/Logging.h"
+    "include/Elysian/Core/Engine.h"
+    "include/Elysian/Core/Application.h"
+    "include/Elysian/Core/Window.h"
+    "include/Elysian/Core/EventManager.h"
+    
+    "include/Elysian/Input/Keys.h"
+
+    "include/Elysian/Render/GraphicsContext.h"
+
+    "include/Elysian/Platform/GLFWindow.h"
+    "include/Elysian/Platform/OpenGL/OGLContext.h"
+
+    "include/Elysian/Event/KeyEvent.h"
+    "include/Elysian/Event/MouseEvent.h"
+    "include/Elysian/Event/WindowEvent.h"
+    
+
     "src/Elysian/Core/Application.cpp"
+    "src/Elysian/Core/Logging.cpp"
+    "src/Elysian/Core/Window.cpp"
+
+    "src/Elysian/Render/GraphicsContext.cpp"
+
+    "src/Elysian/Platform/GLFWindow.cpp"
+    "src/Elysian/Platform/OpenGL/OGLContext.cpp"
+
+    "vendor/glad/glad.c"
 
 )
 
@@ -38,7 +62,9 @@ endfunction(assign_source_group)
 assign_source_group(${source_list})
 
 target_include_directories(Elysian PUBLIC vendor/spdlog/include
-                                          vendor/glfw/include)
+                                          vendor/glfw/include
+                                          vendor/glad
+                                          vendor/KHR)
 
 add_subdirectory(vendor/spdlog)
 add_subdirectory(vendor/glfw)
@@ -51,5 +77,3 @@ target_compile_definitions(Elysian PUBLIC ELYSIAN_VERSION_MAJOR=0
                                           ELYSIAN_VERSION_MINOR=1
                                           ELYSIAN_VERSION_PATCH=0
                                           "$<$<CONFIG:DEBUG>:DEBUG_BUILD>")
-
-target_precompile_headers(Elysian PRIVATE "include/Elysian/Core/pch.h")

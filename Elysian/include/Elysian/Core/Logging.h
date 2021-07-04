@@ -2,6 +2,7 @@
 
 #include <spdlog/spdlog.h>
 
+
 namespace Elysian
 {
 	class Logging
@@ -9,8 +10,8 @@ namespace Elysian
 	public:
 		static void initialize();
 
-		inline static std::shared_ptr<spdlog::logger>& engine_logger() { return s_engine_logger; }
-		inline static std::shared_ptr<spdlog::logger>& client_logger() { return s_client_logger; }
+		inline static auto engine_logger() -> std::shared_ptr<spdlog::logger>& { return s_engine_logger; }
+		inline static auto client_logger() -> std::shared_ptr<spdlog::logger>& { return s_client_logger; }
 	private:
 		static std::shared_ptr<spdlog::logger> s_engine_logger;
 		static std::shared_ptr<spdlog::logger> s_client_logger;

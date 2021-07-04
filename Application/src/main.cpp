@@ -1,8 +1,8 @@
 #include <Elysian.h>
-#include "Elysian/Core/Application.h"
+//#include "Elysian/Core/Application.h"
 
 
-class MyApplication : Elysian::Application
+class MyApplication : public Elysian::Application
 {
 public:
 	MyApplication() {}
